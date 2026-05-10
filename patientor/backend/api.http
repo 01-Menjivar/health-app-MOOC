@@ -1,0 +1,69 @@
+@baseUrl = http://localhost:3001/api
+
+### 1. Ping the server
+GET {{baseUrl}}/ping
+
+### 2. Get all diagnoses
+GET {{baseUrl}}/diagnoses
+
+### 3. Get all patients (without sensitive data like ssn)
+GET {{baseUrl}}/patients
+
+### 4. Get a specific patient by ID 
+GET {{baseUrl}}/patients/d2773336-f723-11e9-8f0b-362b9e155667
+
+### 5. Create a new patient
+POST {{baseUrl}}/patients
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "dateOfBirth": "1990-01-01",
+  "ssn": "123456-789X",
+  "gender": "female",
+  "occupation": "Software Engineer"
+}
+
+### 6. Add a HealthCheck Entry to a Patient
+POST {{baseUrl}}/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "date": "2023-10-05",
+  "specialist": "Dr. Smith",
+  "type": "HealthCheck",
+  "description": "Annual general checkup.",
+  "healthCheckRating": 0,
+  "diagnosisCodes": ["Z57.1", "Z74.3"]
+}
+
+### 7. Add an OccupationalHealthcare Entry to a Patient
+POST {{baseUrl}}/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "date": "2023-11-15",
+  "specialist": "Dr. House",
+  "type": "OccupationalHealthcare",
+  "description": "Patient complains of back pain from prolonged sitting.",
+  "employerName": "Tech Corp Inc.",
+  "sickLeave": {
+    "startDate": "2023-11-15",
+    "endDate": "2023-11-20"
+  }
+}
+
+### 8. Add a Hospital Entry to a Patient
+POST {{baseUrl}}/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "date": "2024-01-10",
+  "specialist": "Dr. Strange",
+  "type": "Hospital",
+  "description": "Patient brought in with a broken arm after falling.",
+  "discharge": {
+    "date": "2024-01-12",
+    "criteria": "Arm successfully casted, pain manageable."
+  }
+}
