@@ -3,7 +3,13 @@ import patients from "../data/patients.ts";
 import { v1 as uuid } from 'uuid';
 
 const getPatients = () : NonSensitivePatient[] =>{
-    return patients;
+    return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
+        id,
+        name,
+        dateOfBirth,
+        gender,
+        occupation
+    }));
 };
 
 const getPatientById = (id: string): Patient | undefined =>{
